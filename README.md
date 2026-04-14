@@ -1,131 +1,237 @@
 # InterviewAI 🤖
 
-> AI-powered interview preparation tool for software engineering placements.  
-> Practice DSA, HR, and System Design questions with real-time feedback powered by Groq AI.
+> AI-powered interview preparation platform for software engineering placements.  
+> Practice DSA, HR, and System Design questions with **instant AI feedback powered by Groq (LLaMA 3).**
 
-![Made with React](https://img.shields.io/badge/React-18-blue?style=flat-square)
-![Powered by Groq](https://img.shields.io/badge/Groq-LLaMA3-orange?style=flat-square)
-![Vite](https://img.shields.io/badge/Vite-5-purple?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-
----
-
-## 🎯 What is this?
-
-A web app where you practice real interview questions and get **instant AI feedback** on your answers — scored on Correctness, Clarity, and Efficiency. Built for BTech CSE 2026 placement preparation.
+![React](https://img.shields.io/badge/Frontend-React%2018-blue?style=flat-square)
+![Node](https://img.shields.io/badge/Backend-Node.js-green?style=flat-square)
+![Groq](https://img.shields.io/badge/AI-Groq%20LLaMA3-orange?style=flat-square)
+![Vite](https://img.shields.io/badge/Build-Vite-purple?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-brightgreen?style=flat-square)
 
 ---
 
-## ✨ Features
+# 🎯 Overview
 
-- 12+ curated interview questions (DSA, HR, System Design)
-- Real-time AI feedback powered by Groq (LLaMA 3)
-- Scores on Correctness, Clarity, and Efficiency
-- Practice history with local persistence
-- Difficulty badges (Easy / Medium / Hard)
-- Hints for each question
-- Dark mode UI
+**InterviewAI** is a full-stack AI-powered interview preparation platform designed to help students practice real interview questions and receive **instant AI-generated feedback**.
+
+Instead of just telling whether an answer is correct, the system evaluates:
+
+- ✅ **Correctness**
+- 💬 **Clarity**
+- ⚡ **Efficiency**
+
+This helps simulate **real technical interview feedback**.
+
+Built specifically for **BTech CSE placement preparation.**
 
 ---
 
-## 🛠️ Tech Stack
+# ✨ Features
+
+- 🧠 AI-powered feedback using **Groq LLaMA 3**
+- 📚 Curated interview questions (DSA, HR, System Design)
+- 📊 Scoring system (Correctness, Clarity, Efficiency)
+- 🕘 Practice attempt history
+- 🏷 Difficulty badges (Easy / Medium / Hard)
+- 💡 Hints for each question
+- 🌙 Dark mode interface
+- ⚡ Fast responses using Groq inference
+
+---
+
+# 🛠 Tech Stack
 
 | Layer | Technology |
-|-------|------------|
+|------|-----------|
 | Frontend | React 18 + Vite |
-| Styling | CSS Variables (no framework) |
-| AI | Groq API (llama-3.3-70b-versatile) |
-| Storage | localStorage |
-| Fonts | Syne + JetBrains Mono |
+| Backend | Node.js + Express |
+| Database | MongoDB |
+| AI | Groq API (LLaMA 3) |
+| Styling | CSS Variables |
+| Storage | MongoDB + Local State |
 
 ---
 
-## 🚀 Getting Started
+# 📁 Project Structure
 
-### 1. Clone the repo
+```
+interview-ai
+│
+├── client                # React frontend
+│   ├── src
+│   │   ├── components
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── FeedbackPanel.jsx
+│   │   │   └── HistoryView.jsx
+│   │   │
+│   │   ├── hooks
+│   │   │   ├── useAI.js
+│   │   │   └── useHistory.js
+│   │   │
+│   │   ├── data
+│   │   │   └── questions.js
+│   │   │
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   └── vite.config.js
+│
+├── server                # Node.js backend
+│   ├── models
+│   │   └── Attempt.js
+│   │
+│   ├── routes
+│   │   ├── feedback.js
+│   │   └── history.js
+│   │
+│   └── index.js
+│
+└── README.md
+```
+
+---
+
+# 🚀 Getting Started
+
+## 1️⃣ Clone the repository
+
 ```bash
-git clone https://github.com/YOUR_USERNAME/interview-ai.git
+git clone https://github.com/HarshitRawat17/interview-ai.git
 cd interview-ai
 ```
 
-### 2. Install dependencies
-```bash
+---
+
+# 2️⃣ Install dependencies
+
+### Frontend
+
+```
+cd client
 npm install
 ```
 
-### 3. Set up your API key
-```bash
-cp .env.example .env
-```
-Open `.env` and add your Groq API key:
-```
-VITE_GROQ_API_KEY=gsk_your_key_here
-```
-Get your **free** key at: https://console.groq.com  
-No credit card required — 14,400 free requests/day!
+### Backend
 
-### 4. Run locally
-```bash
+```
+cd ../server
+npm install
+```
+
+---
+
+# 3️⃣ Setup environment variables
+
+Create `.env` inside **server**
+
+```
+GROQ_API_KEY=your_groq_key
+MONGO_URI=your_mongodb_connection
+PORT=5000
+```
+
+Get your Groq key here:
+
+https://console.groq.com
+
+---
+
+# 4️⃣ Run the backend
+
+```
+cd server
 npm run dev
 ```
-Open http://localhost:5173
 
----
-
-## 📁 Project Structure
+Server runs at:
 
 ```
-interview-ai/
-├── src/
-│   ├── components/
-│   │   ├── Sidebar.jsx       # Question navigation
-│   │   ├── FeedbackPanel.jsx # AI feedback display
-│   │   └── HistoryView.jsx   # Past attempts
-│   ├── hooks/
-│   │   ├── useAI.js          # Groq API integration
-│   │   └── useHistory.js     # localStorage history
-│   ├── data/
-│   │   └── questions.js      # Question bank
-│   ├── App.jsx               # Root component
-│   └── main.jsx              # Entry point
-├── index.html
-├── vite.config.js
-└── .env.example
+http://localhost:5000
 ```
 
 ---
 
-## 🗺️ Roadmap
+# 5️⃣ Run the frontend
 
-- [ ] Code editor with syntax highlighting (CodeMirror)
-- [ ] Timer mode (simulate real interview pressure)
-- [ ] Topic-wise progress charts
+```
+cd client
+npm run dev
+```
+
+Frontend runs at:
+
+```
+http://localhost:5173
+```
+
+---
+
+# 🧠 Example AI Feedback
+
+Example response from Groq:
+
+```
+Correctness: 8/10
+Clarity: 7/10
+Efficiency: 9/10
+
+Your approach using a hash map achieves O(n) time complexity,
+which is optimal for this problem. However the explanation could
+be clearer by describing how collisions are handled.
+```
+
+---
+
+# 🗺 Roadmap
+
+Future improvements planned:
+
+- [ ] Code editor with syntax highlighting
+- [ ] Interview timer mode
+- [ ] Topic progress analytics
 - [ ] Export practice report as PDF
-- [ ] Mock interview mode (full session)
-- [ ] More questions (expand to 30+)
+- [ ] Full mock interview sessions
+- [ ] 30+ curated interview questions
 
 ---
 
-## 💡 Why I Built This
+# 💡 Why I Built This
 
-As a BTech CSE 2026 placement student, I wanted a tool that gives honest, instant feedback on interview answers — not just marks right/wrong, but explains *why* an answer is good or bad.
+As a **BTech CSE 2026 placement student**, I wanted a tool that provides **real interview-style feedback**, not just correct/incorrect answers.
 
-I chose Groq API because it's completely free, extremely fast, and powered by LLaMA 3 — one of the best open source models available. This project taught me React state management, API integration, component architecture, and prompt engineering.
+This project helped me practice:
 
----
-
-## 📸 Screenshots
-
-*Coming soon — will add after UI polish*
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome! If you want to add more questions or features, feel free to fork and contribute.
+- Full-stack architecture
+- API integration
+- AI prompt engineering
+- React state management
+- Backend API design
+- MongoDB data modeling
 
 ---
 
-## 📄 License
+# 📸 Screenshots
 
-MIT
+*(Will be added after UI polish)*
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+If you'd like to:
+
+- Add more interview questions
+- Improve UI
+- Add analytics
+- Improve AI prompts
+
+Feel free to fork the repository and submit a pull request.
+
+---
+
+# 📄 License
+
+MIT License
