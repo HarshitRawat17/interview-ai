@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 
-const API = 'http://localhost:5000/api/auth'
+const API = `${import.meta.env.VITE_API_URL}/api/auth`
 
 export default function useAuth() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  // Load user from localStorage on app start
   useEffect(() => {
     const saved = localStorage.getItem('interviewai_user')
     if (saved) {
@@ -18,6 +17,7 @@ export default function useAuth() {
   async function register(name, email, password) {
     setLoading(true)
     setError(null)
+
     try {
       const res = await fetch(`${API}/register`, {
         method: 'POST',
@@ -26,7 +26,7 @@ export default function useAuth() {
       })
 
       const data = await res.json()
-      if (!res.ok) throw new Error(data.error)
+      if (!res.ok) throw new Error(data.error || 'Registration failed')
 
       localStorage.setItem('interviewai_token', data.token)
       localStorage.setItem('interviewai_user', JSON.stringify(data.user))
@@ -44,6 +44,7 @@ export default function useAuth() {
   async function login(email, password) {
     setLoading(true)
     setError(null)
+
     try {
       const res = await fetch(`${API}/login`, {
         method: 'POST',
@@ -52,7 +53,7 @@ export default function useAuth() {
       })
 
       const data = await res.json()
-      if (!res.ok) throw new Error(data.error)
+      if (!res.ok) throw new Error(data.error || 'Login failed')
 
       localStorage.setItem('interviewai_token', data.token)
       localStorage.setItem('interviewai_user', JSON.stringify(data.user))

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 
-const API = "http://localhost:5000/api/history";
+const API = `${import.meta.env.VITE_API_URL}/api/history`
 
 export function useHistory(getToken, user) {
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState([])
 
   async function fetchHistory() {
     try {
@@ -11,26 +11,26 @@ export function useHistory(getToken, user) {
         headers: {
           Authorization: `Bearer ${getToken()}`
         }
-      });
+      })
 
-      const data = await res.json();
-      setHistory(data);
+      const data = await res.json()
+      setHistory(Array.isArray(data) ? data : [])
     } catch (err) {
-      console.error("Failed to fetch history:", err);
+      console.error('Failed to fetch history:', err)
     }
   }
 
   useEffect(() => {
-    if (user) fetchHistory();
-    else setHistory([]);
-  }, [user]);
+    if (user) fetchHistory()
+    else setHistory([])
+  }, [user])
 
   async function addEntry(questionId, title, answer, feedback, scores, avg, timeTaken) {
     try {
       const res = await fetch(API, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${getToken()}`
         },
         body: JSON.stringify({
@@ -40,31 +40,31 @@ export function useHistory(getToken, user) {
           feedback,
           scores,
           avg,
-          timeTaken   // ✅ NEW
+          timeTaken
         })
-      });
+      })
 
-      const data = await res.json();
-      setHistory(prev => [data, ...prev]);
+      const data = await res.json()
+      setHistory(prev => [data, ...prev])
     } catch (err) {
-      console.error(err);
+      console.error('Failed to add history:', err)
     }
   }
 
   async function clearHistory() {
     try {
       await fetch(API, {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
           Authorization: `Bearer ${getToken()}`
         }
-      });
+      })
 
-      setHistory([]);
+      setHistory([])
     } catch (err) {
-      console.error(err);
+      console.error('Failed to clear history:', err)
     }
   }
 
-  return { history, addEntry, clearHistory };
+  return { history, addEntry, clearHistory }
 }
