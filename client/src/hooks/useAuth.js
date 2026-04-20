@@ -30,8 +30,8 @@ export default function useAuth() {
 
       localStorage.setItem('interviewai_token', data.token)
       localStorage.setItem('interviewai_user', JSON.stringify(data.user))
-
       setUser(data.user)
+
       return true
     } catch (err) {
       setError(err.message)
@@ -57,8 +57,8 @@ export default function useAuth() {
 
       localStorage.setItem('interviewai_token', data.token)
       localStorage.setItem('interviewai_user', JSON.stringify(data.user))
-
       setUser(data.user)
+
       return true
     } catch (err) {
       setError(err.message)
